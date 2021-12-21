@@ -1,0 +1,1 @@
+knowledge of the linux operating system
