@@ -28,24 +28,20 @@ char **sorting(char *flags, char **argv)
 
 char **sort_default(char **argv)
 {
-    printf("\nprinting by default \n");
     return argv;
 }
 
 char **sort_time(char **argv)
 {
-    printf("\nprinting by time \n");
     return argv;
 }
 
 char **sort_size(char **argv)
 {
-    printf("\nprinting by size \n");
     return argv;
 }
 
 char **sort_reverse(char **argv)
 {
-    printf("\nprinting with reverse \n");
     return argv;
 }
