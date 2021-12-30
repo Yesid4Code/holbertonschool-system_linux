@@ -8,7 +8,7 @@
  */
 char *validate_flags(char **argv)
 {
-    char *valid_flags = "1aAlrStR"; //rStR
+    char *valid_flags = "1aAlrStR";
     char buff[32] = {'\0'}, identified_flag[2];
     char *flags = NULL;
 

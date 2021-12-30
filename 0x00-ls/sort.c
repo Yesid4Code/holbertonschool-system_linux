@@ -1,7 +1,5 @@
 #include "headers_ls.h"
-// default -f NO, default alfabéticamente.
 
-//char **sorting_dafult( )
 /**
  * sorting - function that sort an 2D array.
  * @flags: pointer to array of valid flags.
@@ -14,20 +12,14 @@ char **sorting(char *flags, char **argv)
         sort_default(argv);
     else
     {
-        printf("LOCA\n");
         for(int i=0; flags[i]; i++)
         {
-            printf("LOCA2\n");
             if(flags[i] == 't')
-            {
                 sort_time(argv);
-                printf("LOCA3\n");
-            }
             else if(flags[i] == 'S')
                 sort_size(argv);
         }
     }
-    
     if(include(flags, 'r'))
         sort_reverse(argv);
 

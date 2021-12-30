@@ -1,29 +1,6 @@
 #include "headers_ls.h"
 
 /**
- * _calloc - Function that allocates memory for an array.
- * @nm: Number of elemens.
- * @sz: Size of each elemens.
- *
- * Return: a pointer.
- *
-void *_calloc(unsigned int nm, unsigned int sz)
-{
-	unsigned int i;
-	char *p;
-
-	if (nm == 0 || sz == 0)
-		return (NULL);          /printf(Memory not available.*
-	p = malloc(sz * nm);
-	if (p == NULL)
-		return (NULL);
-	for (i = 0; i < nm * sz; i++) //ALEJO _memset(p, 0, (nm * sz))
-		p[i] = 0;
-	return (p);
-}
-*/
-
-/**
  * _calloc - function that reserved memory and fill it with zeros.
  * @sizepptr: number of strings inside the array line.
  * @sizetype: type of data
@@ -59,6 +36,12 @@ char *_memset(char *str, char a, unsigned int size)
 	return (str);
 }
 
+/**
+ * include - function that search a character in a string.
+ * @string: pointer to string.
+ * @arg: character to found in string.
+ * Return: true or false.
+ */
 bool include(char *string, char arg)
 {
     for(int i = 0; i < _strlen(string); i++)
@@ -71,8 +54,8 @@ bool include(char *string, char arg)
 
 /**
  * _strlen -  returns the length of a string.
- * @s: char
- * Return: i
+ * @s: pointer to a string.
+ * Return: size of the string.
  */
 int _strlen(char *s)
 {
