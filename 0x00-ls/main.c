@@ -13,9 +13,8 @@ int main(int argc, char *argv[])
     char *flags = NULL;
     char **valid_args = NULL;
 
-    flags = validate_flags(argv); //_strdup memory
-    printf("flags %s\n\n", flags);
-    valid_args = validate_arguments(argc, argv); // malloc-calloc, errors
+    flags = validate_flags(argv);
+    valid_args = validate_arguments(argc, argv);
 
     printing(flags, valid_args);
     /* dirs = get_dirs(valid_args); */

@@ -9,13 +9,12 @@ void printing(char *flags, char **valid_args)
     int j = 0;
 
     sorting(flags, valid_args);
-    printf("files:\n");
     for(int i=0; valid_args[i]; i++)
     {
         if(lstat(valid_args[i], &file) == 0 && S_ISREG(file.st_mode))
             printf("%s  ", valid_args[i]);
     }
-    printf("\ndir_content\n");
+    
     for(int i=0; valid_args[i]; i++)
     {
         if(lstat(valid_args[i], &file) == 0 && S_ISDIR(file.st_mode))
