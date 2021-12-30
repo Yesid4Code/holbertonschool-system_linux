@@ -23,7 +23,6 @@ int dir_process(char *flags, char **argv, char **files);
 
 /* printing functions */
 void printing(char *flags, char **valid_args);
-void printing_a(char *flags, char **valid_args);
 
 /* sorting functions */
 char **sorting(char *flags, char **argv);
