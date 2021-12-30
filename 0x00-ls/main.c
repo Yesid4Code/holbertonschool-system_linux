@@ -10,13 +10,25 @@
  */
 int main(int argc, char *argv[])
 {
-    char *flags = NULL;
-    char **valid_args = NULL;
+    char *flags = NULL, **valid_argv = NULL;
+    char **files = NULL, **dirs = NULL;
+    (void)argc;
 
     flags = validate_flags(argv);
-    valid_args = validate_arguments(argc, argv);
+    valid_argv = validate_arguments(argc, argv);
+    sorting(flags, valid_argv);
 
-    printing(flags, valid_args);
-    /* dirs = get_dirs(valid_args); */
+    files = get_files(valid_argv);
+    printing(flags, files);
+
+    dirs = get_dirs(valid_argv);
+    dir_process(flags, dirs, files);
+
+    /* free(flags) */
+    /* free_array(valid_argv) */
+    /* free_array(files) */
+    /* free_array(dirs) */
+
+
     return 0;
 }

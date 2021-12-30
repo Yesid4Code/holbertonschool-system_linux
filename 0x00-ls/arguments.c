@@ -39,29 +39,19 @@ char *validate_flags(char **argv)
 }
 
 /**
- * validate_arguments -function that validate all arguments
- * @argc: number of arguments sent by user.
- * @argv: double pointer to the arguments passed in the call
- *
- * Return: double pointer to valid arguments.
+ * argument_errors - function that identify errors on arguments sent by user.
+ * @argv: pointer to arguments sent.
+ * Return: nothing.
  */
-char **validate_arguments(int argc, char *argv[]) // char **errors
+void argument_errors(char **argv)
 {
-    char **valid_args = NULL;
-    int m = 0;
     struct stat file;
 
-    valid_args = _calloc(argc, sizeof(*valid_args));
-    for(int i=1; argv[i] != NULL; i++)
+    for(int i=0; argv[i]; i++)
     {
-        if (lstat(argv[i], &file) == 0 && S_ISREG(file.st_mode))
-        {
-            valid_args[m] = _strdup(argv[i]), m++;
-        }
-        else if (lstat(argv[i], &file) == 0 && S_ISDIR(file.st_mode))
-            {
-                valid_args[m] = _strdup(argv[i]), m++;
-            }
+        if(lstat(argv[i], &file) == 0 &&
+                    (S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
+            continue;
         else if(_strcmp(argv[i],"---") == 0)//error:----
         {
             fprintf(stderr,
@@ -77,14 +67,39 @@ char **validate_arguments(int argc, char *argv[]) // char **errors
             "%s: cannot access %s: No such file or directory\n",
             argv[0], argv[i]);
         }
-
     }
+}
+
+/**
+ * validate_arguments -function that validate all arguments
+ * @argc: number of arguments sent by user.
+ * @argv: double pointer to the arguments passed in the call
+ *
+ * Return: double pointer to valid arguments.
+ */
+char **validate_arguments(int argc, char *argv[]) // char **errors
+{
+    int m = 0;
+    char **valid_argv = NULL;
+    struct stat file;
+
+    argument_errors(argv);
+
+    valid_argv = _calloc(argc, sizeof(*valid_argv));
+
+    for(int i=1; argv[i] != NULL; i++)
+    {
+        if (lstat(argv[i], &file) == 0 &&
+                            (S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
+            valid_argv[m] = _strdup(argv[i]), m++;
+    }
+
     if (m == 0)
     {
-        free(valid_args), valid_args = malloc(sizeof(*valid_args));
-        if(valid_args == NULL)
+        free(valid_argv), valid_argv = malloc(sizeof(*valid_argv));
+        if(valid_argv == NULL)
             return NULL;
-        valid_args[0] = _strdup(".");
+        valid_argv[0] = _strdup(".");
     }
-    return valid_args;
+    return valid_argv;
 }
