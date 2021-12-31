@@ -34,13 +34,17 @@ char **sort_reverse(char **argv);
 
 /* info functions */
 
-/* Auxiliar functions */
+
+/* Memory functions */
 void *_calloc(unsigned int nm, unsigned int sz);
+char *_strdup(char *str);
+char *_memset(char *str, char a, unsigned int size);
+void free_array(char **argv);
+
+/* Auxiliar functions */
 bool include(char *string, char arg);
 int _strlen(char *s);
 char *_strcat(char *dest, char *src);
 int _strcmp(char *s1, char *s2);
-char *_strdup(char *str);
-char *_memset(char *str, char a, unsigned int size);
 
 #endif /* END HEADERS_LS */
