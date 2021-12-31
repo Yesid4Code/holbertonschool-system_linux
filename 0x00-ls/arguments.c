@@ -86,17 +86,19 @@ char **validate_arguments(int argc, char *argv[]) // char **errors
     argument_errors(argv);
 
     valid_argv = _calloc(argc, sizeof(*valid_argv));
-
-    for(int i=1; argv[i] != NULL; i++)
+    if(valid_argv)
     {
-        if (lstat(argv[i], &file) == 0 &&
-                            (S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
-            valid_argv[m] = _strdup(argv[i]), m++;
+        for(int i=1; argv[i] != NULL; i++)
+        {
+            if (lstat(argv[i], &file) == 0 &&
+                                (S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
+                valid_argv[m] = _strdup(argv[i]), m++;
+        }
     }
 
     if (m == 0)
     {
-        free(valid_argv), valid_argv = malloc(sizeof(*valid_argv));
+        free(valid_argv), valid_argv = _calloc(2, sizeof(*valid_argv) + 1);
         if(valid_argv == NULL)
             return NULL;
         valid_argv[0] = _strdup(".");

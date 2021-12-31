@@ -12,7 +12,6 @@ int main(int argc, char *argv[])
 {
     char *flags = NULL, **valid_argv = NULL;
     char **files = NULL, **dirs = NULL;
-    //(void)argc;
 
     flags = validate_flags(argv);
     valid_argv = validate_arguments(argc, argv);

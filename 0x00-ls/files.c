@@ -37,9 +37,6 @@ char **get_dirs(char **argv)
     char **directories = NULL;
     struct stat dir;
 
-    if(!argv)
-        return NULL;
-
     directories = _calloc(100, sizeof(*directories));
 
     for(int i=0; argv[i]; i++)
