@@ -12,7 +12,7 @@ int main(int argc, char *argv[])
 {
     char *flags = NULL, **valid_argv = NULL;
     char **files = NULL, **dirs = NULL;
-    (void)argc;
+    //(void)argc;
 
     flags = validate_flags(argv);
     valid_argv = validate_arguments(argc, argv);
@@ -24,10 +24,10 @@ int main(int argc, char *argv[])
     dirs = get_dirs(valid_argv);
     dir_process(flags, dirs, files);
 
-    /* free(flags) */
-    /* free_array(valid_argv) */
-    /* free_array(files) */
-    /* free_array(dirs) */
+    free(flags);
+    free_array(valid_argv);
+    free_array(files);
+    free_array(dirs);
 
 
     return 0;
