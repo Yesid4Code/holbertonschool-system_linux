@@ -13,16 +13,13 @@ char **get_files(char **argv)
     struct stat file;
 
     files = _calloc(100, sizeof(*files));
-    //printf("HERE\n");
     for(int i=0; argv[i]; i++)
     {
         if(lstat(argv[i], &file) == 0 && S_ISREG(file.st_mode))
             files[j] = _strdup(argv[i]), j++;
     }
-    //printf("HERE2\n");
     if(j==0)
     {
-        //printf("HERE3\n");
         free(files);
         return NULL;
     }
@@ -53,7 +50,6 @@ char **get_dirs(char **argv)
     if(j==0)
     {
         free(directories);
-        //printf("NULLLLLLLLLLLLLLLLLLL");
         return NULL;
     }
     return directories;
@@ -96,7 +92,7 @@ int dir_process(char *flags, char **argv, char **files)
         if(files)
             printf("\n%s:\n", argv[i]);
         printing(flags, dir_content);
-        /* free_array(dir_content) */
+        free_array(dir_content);
     }
     return 0;
 }
