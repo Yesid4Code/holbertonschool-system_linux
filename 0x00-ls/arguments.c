@@ -57,7 +57,8 @@ void argument_errors(char **argv)
             fprintf(stderr,
             "%s: cannot access '%s': No such file or directory\nTry 'hls --help' for more information.\n",
             argv[0], argv[i]);
-            //free(errors); exit2;
+            //free(errors);
+            exit(2);
         }
         else if(argv[i][0] == '-' && _strlen(argv[i]) > 1)
             continue;
@@ -66,6 +67,7 @@ void argument_errors(char **argv)
             fprintf(stderr,
             "%s: cannot access %s: No such file or directory\n",
             argv[0], argv[i]);
+            exit(2);
         }
     }
 }
