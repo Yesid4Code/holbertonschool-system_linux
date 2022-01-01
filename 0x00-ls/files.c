@@ -58,7 +58,7 @@ char **get_dirs(char **argv)
  * @argv: pointer where directories are allocated
  * Return: 0: sucessfull, -1 in case of errors.
  */
-int dir_process(char *flags, char **argv, char **files)
+int dir_process(int argc, char **argv, char *flags, char **files)
 {
     int j = 0;
     char **dir_content = NULL;
@@ -82,13 +82,31 @@ int dir_process(char *flags, char **argv, char **files)
             }
             j = 0;
             while((read = readdir(dir)))
-                dir_content[j] = _strdup(read->d_name), j++;
-
+            {
+                if(include(flags, 'a'))
+                    dir_content[j] = _strdup(read->d_name), j++;
+                else if(include(flags, 'A'))
+                {
+                    if(_strcmp(read->d_name, ".") != 0 && _strcmp(read->d_name, "..") != 0)
+                        dir_content[j] = _strdup(read->d_name), j++;
+                }
+                else
+                {
+                    if(_strcmp(read->d_name, ".") != 0 &&
+                                    _strcmp(read->d_name, "..") != 0 &&
+                                    read->d_name[0] != '.')
+                        dir_content[j] = _strdup(read->d_name), j++;
+                }
+            }
             closedir(dir);
         }
         if(files)
-            printf("\n%s:\n", argv[i]);
+            printf("\n");
+        if(argc > 2)
+            printf("%s:\n", argv[i]);
         printing(flags, dir_content);
+        if(argv[i+1])
+            printf("\n");
         free_array(dir_content);
     }
     return 0;
