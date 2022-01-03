@@ -27,21 +27,45 @@ char **sorting(char *flags, char **argv)
 	return (argv);
 }
 
+/**
+ * sort_default - function that sorts if no flags were found
+ * @argv: pointer where data are allocated.
+ *
+ * Return: pointer to sorted and allocated data.
+ */
 char **sort_default(char **argv)
 {
 	return (argv);
 }
 
+/**
+ * sort_time - function that sort data by time
+ * @argv: pointer where data are allocated.
+ *
+ * Return: pointer to sorted and allocated data.
+ */
 char **sort_time(char **argv)
 {
 	return (argv);
 }
 
+/**
+ * sort_size - function that order by the size of a file.
+ * @argv: pointer where data are allocated..
+ *
+ * Return: pointer to sorted and allocated data.
+ */
 char **sort_size(char **argv)
 {
 	return (argv);
 }
 
+/**
+ * sort_reverse - function that reverse
+ * @argv: pointer where data are allocated.
+ *
+ * Return: pointer to sorted and allocated data.
+ */
 char **sort_reverse(char **argv)
 {
 	return (argv);
