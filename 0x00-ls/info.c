@@ -1,3 +1,3 @@
 #include "headers_ls.h"
 
-//flags: 1l
+/*flags: 1l */

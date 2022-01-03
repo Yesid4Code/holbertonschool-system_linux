@@ -8,12 +8,12 @@
  */
 bool include(char *string, char arg)
 {
-    for(int i = 0; i < _strlen(string); i++)
-    {
-        if(string[i] == arg)
-            return true;
-    }
-    return false;
+	for (int i = 0; i < _strlen(string); i++)
+	{
+		if (string[i] == arg)
+			return (true);
+	}
+	return (false);
 }
 
 /**
@@ -53,8 +53,10 @@ char *_strcat(char *dest, char *src)
  **_strcmp - functions that compares two strings.
  * @s1: address of a string.
  * @s2: address of the second string.
+ *
  * Return: integer less than, equal to, or greater than zero.
- * If s1 is found, respectively, to be less than, to match,  or  be greater than s2.
+ * If s1 is found, respectively,
+ * to be less than, to match,  or  be greater than s2.
  */
 int _strcmp(char *s1, char *s2)
 {

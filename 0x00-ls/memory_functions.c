@@ -37,11 +37,11 @@ char *_strdup(char *str)
 	i = _strlen(str) + 1;
 	la = malloc(i * sizeof(*str) + 1); /*reserve the space of memory*/
 	if (!la)
-		return (NULL);
+	return (NULL);
 
 	for (j = 0; j < i; j++)
 		la[j] = str[j];
-    la[j] = '\0';
+	la[j] = '\0';
 	return (la);
 }
 
@@ -60,13 +60,16 @@ char *_memset(char *str, char a, unsigned int size)
 		str[i] = a;
 	return (str);
 }
-
+/**
+ * free_array - function that deallocated reserved memory
+ * @argv: double pointer to the allocated memory.
+ */
 void free_array(char **argv)
 {
-    if(argv)
-    {
-        for(int i=0; argv[i]; i++)
-            free(argv[i]);
-        free(argv);
-    }
+	if (argv)
+	{
+		for (int i = 0; argv[i]; i++)
+		free(argv[i]);
+		free(argv);
+	}
 }
