@@ -88,28 +88,19 @@ int dir_process(int argc, char **argv, char *flags, char **files)
 			{
 				if (include(flags, 'a'))
 					dir_content[j] = _strdup(read->d_name), j++;
-				else if (include(flags, 'A'))
-				{
-					if (_strcmp(read->d_name, ".") != 0 && _strcmp(read->d_name, "..") != 0)
-						dir_content[j] = _strdup(read->d_name), j++;
-				}
-				else
-				{
-					if (_strcmp(read->d_name, ".") != 0 &&
-						_strcmp(read->d_name, "..") != 0 && read->d_name[0] != '.')
-						dir_content[j] = _strdup(read->d_name), j++;
-				}
+				else if (include(flags, 'A') &&
+					(_strcmp(read->d_name, ".") != 0 && _strcmp(read->d_name, "..") != 0))
+					dir_content[j] = _strdup(read->d_name), j++;
+				else if (_strcmp(read->d_name, ".") != 0 &&
+						_strcmp(read->d_name, "..") != 0 &&
+							read->d_name[0] != '.')
+					dir_content[j] = _strdup(read->d_name), j++;
 			}
 			closedir(dir);
 		}
-		if (files)
-			printf("\n");
-		if (argc > 2)
-			printf("%s:\n", argv[i]);
+		files ? printf("\n") : 1, (argc > 2) ? printf("%s:\n", argv[i]) : 1;
 		printing(flags, dir_content);
-		if (argv[i + 1])
-			printf("\n");
-		free_array(dir_content);
+		(argv[i + 1]) ? printf("\n") : 1, free_array(dir_content);
 	}
 	return (0);
 }
