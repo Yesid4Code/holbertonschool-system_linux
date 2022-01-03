@@ -68,7 +68,7 @@ void argument_errors(char **argv)
 			fprintf(stderr,
 			"%s: cannot access %s: No such file or directory\n",
 			argv[0], argv[i]);
-			/*exit(2);*/
+			exit(2);
 		}
 	}
 }
@@ -85,8 +85,6 @@ char **validate_arguments(int argc, char *argv[]) /* char **errors */
 	int m = 0;
 	char **valid_argv = NULL;
 	struct stat file;
-
-	argument_errors(argv);
 
 	valid_argv = _calloc(argc, sizeof(*valid_argv));
 	if (valid_argv)

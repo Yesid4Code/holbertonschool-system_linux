@@ -14,6 +14,7 @@ int main(int argc, char *argv[])
 	char *flags = NULL, **valid_argv = NULL;
 	char **files = NULL, **dirs = NULL;
 
+	argument_errors(argv);
 	flags = validate_flags(argv);
 	valid_argv = validate_arguments(argc, argv);
 	sorting(flags, valid_argv);
