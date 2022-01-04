@@ -4,19 +4,18 @@
 /* System header*/
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
 
 /**
- * cars - struct of a car
+ * struct cars - struct of a car
  * @id: id of car.
  * @laps: number of laps completed by the car.
  * @next: pointer to the next car (node).
  */
 typedef struct cars
 {
-        int id;
-        size_t laps;
-        struct cars *next;
+	int id;
+	size_t laps;
+	struct cars *next;
 } struct_car;
 
 void race_state(int *id, size_t size);
