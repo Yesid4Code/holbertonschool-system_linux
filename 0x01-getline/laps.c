@@ -7,6 +7,7 @@
  */
 void race_state(int *id, size_t size)
 {
+	size_t i;
 	struct_car *car = NULL;
 	struct_car *temp = NULL;
 	static struct_car *head_race;
@@ -17,7 +18,7 @@ void race_state(int *id, size_t size)
 		return;
 	}
 
-	for (size_t i = 0; i < size; i++)
+	for (i = 0; i < size; i++)
 	{
 		temp = head_race;
 		car = get_car(temp, id[i]);

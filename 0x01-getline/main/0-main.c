@@ -5,7 +5,7 @@
  *
  * Return: always 0.
  */
-int main()
+int main(void)
 {
 
 	int ids1[3] = {1, 42, 101};
