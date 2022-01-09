@@ -13,7 +13,7 @@ void race_state(int *id, size_t size)
 
 	if (size == 0)
 	{
-		free_cars(&head_race);
+		free_cars(head_race);
 		return;
 	}
 
@@ -106,14 +106,14 @@ void add_car(struct_car **head_race, int id)
  * free_cars - function that free the list with cars
  * @head: pointer to a list.
  */
-void free_cars(struct_car **head)
+void free_cars(struct_car *head)
 {
 	struct_car *temp;
 
-	while (*head)
+	while (head)
 	{
-		temp = *head;
-		*head = (*head)->next;
+		temp = head;
+		head = head->next;
 		free(temp);
 	}
 }
