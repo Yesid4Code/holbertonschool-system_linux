@@ -21,6 +21,6 @@ typedef struct cars
 void race_state(int *id, size_t size);
 struct_car *get_car(struct_car *head_race, int id);
 void add_car(struct_car **head_race, int id);
-void free_cars(struct_car *head);
+void free_cars(struct_car **head);
 
 #endif /* End of LAPS_H*/
