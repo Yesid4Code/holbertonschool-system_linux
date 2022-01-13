@@ -7,13 +7,13 @@
  */
 char *_getline(const int fd)
 {
-	char *line = NULL;
+	char *line;
 	fd_t *file;
 	static fd_t *head;
 
 	if (fd == -1)
 	{
-		free_fd(&head);
+		//free_fd(&head);
 		return (NULL);
 	}
 
@@ -21,11 +21,12 @@ char *_getline(const int fd)
 	if (!file)
 		file = add_fd(&head, fd);
 
-	line = get_line(file);
+	if (file)
+		line = get_line(file);
 	if (!line)
 		free_fd(&head);
+	//printf("\n\nSIZE OF FD_T: %lu\n\n", sizeof(file->buffer));
 
-	// sleep(1);
 	return (line);
 }
 
@@ -44,19 +45,25 @@ fd_t *get_fd(fd_t **head, const int fd)
 fd_t *add_fd(fd_t **head, const int fd)
 {
 	char buff[READ_SIZE];
-	fd_t *new, *tmp = *head;
+	fd_t *new, *tmp;
 
 	memset(buff, 0, READ_SIZE);
-	new = malloc(sizeof(*new));
+	new = malloc(sizeof(fd_t));
 	if (!new)
 		return (NULL);
 	new->fd = fd;
 	new->idx = 0;
 	new->bytes = read(fd, buff, READ_SIZE);
-	new->buffer = malloc(new->bytes * (sizeof(char)));
+	if (new->bytes <= 0)
+	{
+		free(new);
+		return (NULL);
+	}
+	new->buffer = malloc((new->bytes + 1) * (sizeof(char)));
 	if (!new->buffer)
 		return (NULL);
-	memcpy(new->buffer, buff, new->bytes);
+	//memset(new->buffer, 0, new->buffer + 1);
+	strcpy(new->buffer, buff);
 	//new->buffer[new->bytes + 1] = '\0';
 	new->next = NULL;
 
@@ -65,6 +72,8 @@ fd_t *add_fd(fd_t **head, const int fd)
 		*head = new;
 		return (new);
 	}
+
+	tmp = *head;
 	while (tmp->next)
 		tmp = tmp->next;
 	tmp->next = new;
@@ -75,7 +84,7 @@ fd_t *add_fd(fd_t **head, const int fd)
 char *get_line(fd_t *file)
 {
 	int idx = 0, j = 0;
-	char *line = NULL, buff[READ_SIZE];
+	char *line, buff[READ_SIZE];
 
 	idx = file->idx;
 	if (idx >= file->bytes)
@@ -90,6 +99,9 @@ char *get_line(fd_t *file)
 	}
 	file->idx = idx + 1;
 	line = malloc(j * sizeof(char) + 1);
+	memset(line, '\0', j);
+	if (!line)
+		return (NULL);
 	memcpy(line, buff, j);
 
 	return (line);
@@ -97,13 +109,17 @@ char *get_line(fd_t *file)
 
 void free_fd(fd_t **head)
 {
-	fd_t *tmp = *head;
+	fd_t *tmp;
 
 	while (*head)
 	{
 		tmp = *head;
-		free((*head)->buffer), free(*head);
+		free((*head)->buffer);
+		(*head)->buffer = NULL;//free((*head)->next);
+		//free(*head);
 		*head = tmp->next;
+		free(tmp);
 	}
-	//free(head);
+	free(*head);
 }
+//valgrind-- leak - check = full-- show - leak - kinds = all-- track - origins = yes - s./ a.out
