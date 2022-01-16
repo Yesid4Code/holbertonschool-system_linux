@@ -98,11 +98,12 @@ char *get_line(fd_t *file)
 		idx++, j++;
 	}
 	file->idx = idx + 1;
-	line = malloc(j * sizeof(char) + 1);
-	memset(line, '\0', j);
+	line = malloc((j + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
+	memset(line, '\0', (j + 1));
 	memcpy(line, buff, j);
+	//strcpy(line, buff);
 
 	return (line);
 }
