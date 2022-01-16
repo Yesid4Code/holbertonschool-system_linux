@@ -1,9 +1,11 @@
 #include "_getline.h"
+
 /**
- * _getline -
+ * _getline - function that get data from a file line per line.
  * @fd:fd is the file descriptor to read from.
  *
- * Return: a null-terminated string that does not include the newline character.
+ * Return: a null-terminated string.
+ * The string does not include the newline character.
  */
 char *_getline(const int fd)
 {
@@ -12,10 +14,7 @@ char *_getline(const int fd)
 	static fd_t *head;
 
 	if (fd == -1)
-	{
-		//free_fd(&head);
 		return (NULL);
-	}
 
 	file = get_fd(&head, fd);
 	if (!file)
@@ -25,11 +24,17 @@ char *_getline(const int fd)
 		line = get_line(file);
 	if (!line)
 		free_fd(&head);
-	//printf("\n\nSIZE OF FD_T: %lu\n\n", sizeof(file->buffer));
 
 	return (line);
 }
 
+/**
+ * get_fd - function to get the fd.
+ * @head: pointer to the head of the list.
+ * @fd: fd to find.
+ *
+ * Return: pointer to the node with the fd, NULL otherwise.
+ */
 fd_t *get_fd(fd_t **head, const int fd)
 {
 	fd_t *file = *head;
@@ -37,11 +42,18 @@ fd_t *get_fd(fd_t **head, const int fd)
 	while (file)
 	{
 		if (file->fd == fd)
-			return file;
+			return (file);
 	}
 	return (NULL);
 }
 
+/**
+ * add_fd - function that add a fd as a node in a list.
+ * @head: pointer to head of the list.
+ * @fd: fd descriptor to add.
+ *
+ * Return: pointer to the new node added, NULL otherwise.
+ */
 fd_t *add_fd(fd_t **head, const int fd)
 {
 	char buff[READ_SIZE];
@@ -62,9 +74,7 @@ fd_t *add_fd(fd_t **head, const int fd)
 	new->buffer = malloc((new->bytes + 1) * (sizeof(char)));
 	if (!new->buffer)
 		return (NULL);
-	//memset(new->buffer, 0, new->buffer + 1);
 	strcpy(new->buffer, buff);
-	//new->buffer[new->bytes + 1] = '\0';
 	new->next = NULL;
 
 	if (!*head)
@@ -81,6 +91,12 @@ fd_t *add_fd(fd_t **head, const int fd)
 	return (new);
 }
 
+/**
+ * get_line - Get the line to print.
+ * @file: file to search each line.
+ *
+ * Return: pointer to line, NULL otherwise.
+ */
 char *get_line(fd_t *file)
 {
 	int idx = 0, j = 0;
@@ -91,23 +107,27 @@ char *get_line(fd_t *file)
 	{
 		return (NULL);
 	}
-	
+
 	while (idx < file->bytes && file->buffer[idx] != '\n')
 	{
 		buff[j] = file->buffer[idx];
 		idx++, j++;
 	}
 	file->idx = idx + 1;
+
 	line = malloc((j + 1) * sizeof(char));
 	if (!line)
 		return (NULL);
 	memset(line, '\0', (j + 1));
 	memcpy(line, buff, j);
-	//strcpy(line, buff);
 
 	return (line);
 }
 
+/**
+ * free_fd - funtion to free each fd and its buffer.
+ * @head: pointer to the header of the list.
+ */
 void free_fd(fd_t **head)
 {
 	fd_t *tmp;
@@ -116,11 +136,9 @@ void free_fd(fd_t **head)
 	{
 		tmp = *head;
 		free((*head)->buffer);
-		(*head)->buffer = NULL;//free((*head)->next);
-		//free(*head);
+		(*head)->buffer = NULL;
 		*head = tmp->next;
 		free(tmp);
 	}
 	free(*head);
 }
-//valgrind-- leak - check = full-- show - leak - kinds = all-- track - origins = yes - s./ a.out

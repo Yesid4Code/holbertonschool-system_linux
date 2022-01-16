@@ -8,17 +8,13 @@
 
 #define READ_SIZE 1024
 
-/*
-line buffer \n
-file buffer
-no buffer
-*/
-
-
-
 /**
- * 
- * 
+ * struct fd - struct for a linked list with the fd.
+ * @fd: the fd id.
+ * @idx: index to throw the buffer of each fd.
+ * @bytes: bytes of each fd.
+ * @buffer: to storage the content of each fd.
+ * @next: pointer to next fd created.
  */
 typedef struct fd
 {
@@ -27,7 +23,7 @@ typedef struct fd
 	ssize_t bytes;
 	char *buffer;
 	struct fd *next;
-}fd_t;
+} fd_t;
 
 char *_getline(const int fd);
 fd_t *get_fd(fd_t **head, const int fd);
