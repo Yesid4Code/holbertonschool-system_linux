@@ -14,7 +14,10 @@ char *_getline(const int fd)
 	static fd_t *head;
 
 	if (fd == -1)
+	{
+		free_fd(&head);
 		return (NULL);
+	}
 
 	file = get_fd(&head, fd);
 	if (!file)
