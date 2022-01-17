@@ -103,13 +103,15 @@ fd_t *add_fd(fd_t **head, const int fd)
 char *get_line(fd_t *file)
 {
 	int idx = 0, j = 0;
-	char *line, buff[READ_SIZE];
+	char *line, *buff; /*[READ_SIZE]; */
 
 	idx = file->idx;
 	if (idx >= file->bytes)
-	{
 		return (NULL);
-	}
+
+	buff = malloc(100 * sizeof(char));
+	if (!buff)
+		return (NULL);
 
 	while (idx < file->bytes && file->buffer[idx] != '\n')
 	{
@@ -124,6 +126,7 @@ char *get_line(fd_t *file)
 	memset(line, '\0', (j + 1));
 	memcpy(line, buff, j);
 
+	free(buff);
 	return (line);
 }
 
