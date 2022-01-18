@@ -9,7 +9,7 @@
  */
 char *_getline(const int fd)
 {
-	char *line;
+	char *line = NULL;
 	fd_t *file;
 	static fd_t *head;
 
