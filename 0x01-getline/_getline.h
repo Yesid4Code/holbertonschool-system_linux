@@ -6,7 +6,7 @@
 #include <string.h>
 #include <stdlib.h>
 
-#define READ_SIZE 2048
+#define READ_SIZE 4096
 
 /**
  * struct fd - struct for a linked list with the fd.
