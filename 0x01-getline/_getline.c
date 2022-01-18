@@ -110,7 +110,7 @@ char *get_line(fd_t *file)
 	if (idx >= file->bytes)
 		return (NULL);
 
-	buff = malloc(1000 * sizeof(char));
+	buff = malloc(READ_SIZE * sizeof(char));
 	if (!buff)
 		return (NULL);
 
