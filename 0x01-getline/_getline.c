@@ -46,6 +46,7 @@ fd_t *get_fd(fd_t **head, const int fd)
 	{
 		if (file->fd == fd)
 			return (file);
+		file = file->next;
 	}
 	return (NULL);
 }
@@ -62,7 +63,7 @@ fd_t *add_fd(fd_t **head, const int fd)
 	char buff[READ_SIZE];
 	fd_t *new, *tmp;
 
-	memset(buff, 0, READ_SIZE);
+	memset(buff, '\0', READ_SIZE);
 	new = malloc(sizeof(fd_t));
 	if (!new)
 		return (NULL);
@@ -74,10 +75,10 @@ fd_t *add_fd(fd_t **head, const int fd)
 		free(new);
 		return (NULL);
 	}
-	new->buffer = malloc((new->bytes + 1) * (sizeof(char)));
+	new->buffer = malloc((READ_SIZE + 1) * (sizeof(char)));
 	if (!new->buffer)
 		return (NULL);
-	strcpy(new->buffer, buff);
+	strncpy(new->buffer, buff, READ_SIZE);
 	new->next = NULL;
 
 	if (!*head)
@@ -109,7 +110,7 @@ char *get_line(fd_t *file)
 	if (idx >= file->bytes)
 		return (NULL);
 
-	buff = malloc(100 * sizeof(char));
+	buff = malloc(1000 * sizeof(char));
 	if (!buff)
 		return (NULL);
 
