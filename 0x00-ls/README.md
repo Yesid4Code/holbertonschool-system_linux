@@ -1,22 +1,23 @@
-Creation of my own ls command
+# [HLS][HLS]
+**HLS** lists files and directories contained in an HFS volume ([Wikipedia][HFS+] **-** [Apple][Apple]).
 
-HLS
-hls lists files and directories contained in an HFS volume.
-link to full description: https://linux.die.net/man/1/hls
+## **flags**
+
+This version of `ls command` ([man ls][LS]) works with the following flags:
+
+| **Flag** | **Description** |
+|----|--|
+| -f |  |
+| -r |  |
+| -1 |  |
+| -l |  |
+| -a |  |
+| -R |  |
 
 
 
-openddir no lista los documentos ordenados, "ls -f" lista los documentos como deberían aparecer con openddir.
-
-almacenar los punteros en un array y organizarlos, no se puede usar scandir porque la estructura dirent puede no contener toda la información.
-
-flags
--f
--r
--1
--l
--a
--R
-
-https://linux.die.net/man/1/hls
-https://man7.org/linux/man-pages/man1/ls.1.html
+[//]: # (links)
+  [HLS]: <https://linux.die.net/man/1/hls>
+  [HFS+]: <https://en.wikipedia.org/wiki/HFS_Plus>
+  [Apple]: <https://developer.apple.com/library/archive/technotes/tn/tn1150.html>
+  [LS]: <https://man7.org/linux/man-pages/man1/ls.1.html>
