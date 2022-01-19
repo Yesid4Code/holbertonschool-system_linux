@@ -7,12 +7,14 @@ This version of `ls command` ([man ls][LS]) works with the following flags:
 
 | **Flag** | **Description** |
 |----|--|
-| -f |  |
-| -r |  |
-| -1 |  |
-| -l |  |
-| -a |  |
-| -R |  |
+| -r | Sort entries in reverse order before displaying. |
+| -1 |  each entry appears on a single line |
+| -l | Display entries in long format. |
+| -a | All files and directories are shown, including "invisible" files |
+| -R | Like `-a` option, buth without `'.'` and `'..'` "invisible" files only. |
+
+-f this is the default mode after execute the funtion `opendir()`
+Do not sort directory contents; list them in the order they appear in the directory. This option effectively enables -a and -U and disables -l, -s, and -t.
 
 
 
