@@ -66,9 +66,10 @@ char *_memset(char *str, char a, unsigned int size)
  */
 void free_array(char **argv)
 {
+	int i;
 	if (argv)
 	{
-		for (int i = 0; argv[i]; i++)
+		for (i = 0; argv[i]; i++)
 		free(argv[i]);
 		free(argv);
 	}
