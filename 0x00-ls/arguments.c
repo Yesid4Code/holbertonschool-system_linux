@@ -18,7 +18,7 @@ void argument_errors(char **argv)
 		else if (_strcmp(argv[i], "---") == 0) /*//error:----*/
 		{
 			fprintf(stderr,
-			"%s: cannot access '%s': No such file or directory\nTry 'hls --help' for more information.\n",
+			"%s: cannot access %s: No such file or directory\nTry 'hls --help' for more information.\n",
 			argv[0], argv[i]);
 			/*free(errors);*/
 			exit(2);
@@ -28,7 +28,7 @@ void argument_errors(char **argv)
 		else
 		{
 			fprintf(stderr,
-			"%s: cannot access '%s': No such file or directory\n",
+			"%s: cannot access %s: No such file or directory\n",
 			argv[0], argv[i]);
 			exit(2);
 		}
