@@ -23,7 +23,7 @@ int main(int argc, char *argv[])
 	printing(flags, files);
 
 	dirs = get_dirs(valid_argv);
-	dir_process(argc, dirs, flags, files);
+	dir_process(argc, dirs, flags, files, argv[0]);
 
 	free(flags);
 	free_array(valid_argv);

@@ -22,7 +22,7 @@ char **validate_arguments(int argc, char *argv[]);
 /* files functions */
 char **get_files(char **argv);
 char **get_dirs(char **argv);
-int dir_process(int argc, char **argv, char *flags, char **files);
+int dir_process(int argc, char **argv, char *flags, char **files, char *hls);
 
 /* printing functions */
 void printing(char *flags, char **valid_args);

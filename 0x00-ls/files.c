@@ -61,7 +61,7 @@ char **get_dirs(char **argv)
  *
  * Return: 0: sucessfull, -1 in case of errors.
  */
-int dir_process(int argc, char **argv, char *flags, char **files)
+int dir_process(int argc, char **argv, char *flags, char **files, char *hls)
 {
 	int i, j = 0;
 	char **dir_content = NULL;
@@ -82,7 +82,7 @@ int dir_process(int argc, char **argv, char *flags, char **files)
 			{
 				fprintf(stderr,
 					"%s: cannot open directory %s: Permission denied",
-					argv[0], argv[i]);
+					hls, argv[i]);
 				return (-1);
 			}
 			j = 0;
