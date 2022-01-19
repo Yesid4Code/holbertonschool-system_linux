@@ -30,7 +30,8 @@ void argument_errors(char **argv)
 			fprintf(stderr,
 			"%s: cannot access %s: No such file or directory\n",
 			argv[0], argv[i]);
-			/*exit(2);*/
+			if (!argv[2])
+				exit(2);
 		}
 	}
 }
