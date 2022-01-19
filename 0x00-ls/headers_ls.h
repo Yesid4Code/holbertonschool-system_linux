@@ -39,8 +39,8 @@ void flag_l(char **argv);
 char *permissions(struct stat file);
 char *get_date(struct stat file);
 
-    /* Memory functions */
-    void *_calloc(unsigned int nm, unsigned int sz);
+/* Memory functions */
+void *_calloc(unsigned int nm, unsigned int sz);
 char *_strdup(char *str);
 char *_memset(char *str, char a, unsigned int size);
 void free_array(char **argv);

@@ -1,6 +1,41 @@
 #include "headers_ls.h"
 
 /**
+ * argument_errors - function that identify errors on arguments sent by user.
+ * @argv: pointer to arguments sent.
+ * Return: nothing.
+ */
+void argument_errors(char **argv)
+{
+	int i;
+	struct stat file;
+
+	for (i = 0; argv[i]; i++)
+	{
+		if (lstat(argv[i], &file) == 0 &&
+				(S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
+			continue;
+		else if (_strcmp(argv[i], "---") == 0) /*//error:----*/
+		{
+			fprintf(stderr,
+			"%s: cannot access '%s': No such file or directory\nTry 'hls --help' for more information.\n",
+			argv[0], argv[i]);
+			/*free(errors);*/
+			exit(2);
+		}
+		else if (argv[i][0] == '-' && _strlen(argv[i]) > 1)
+			continue;
+		else
+		{
+			fprintf(stderr,
+			"%s: cannot access '%s': No such file or directory\n",
+			argv[0], argv[i]);
+			exit(2);
+		}
+	}
+}
+
+/**
  * validate_flags - functions that validates the sent flags
  * @argv: doble pointer of arguments sent by the user.
  *
@@ -40,40 +75,6 @@ char *validate_flags(char **argv)
 	return (flags);
 }
 
-/**
- * argument_errors - function that identify errors on arguments sent by user.
- * @argv: pointer to arguments sent.
- * Return: nothing.
- */
-void argument_errors(char **argv)
-{
-	int i;
-	struct stat file;
-
-	for (i = 0; argv[i]; i++)
-	{
-		if (lstat(argv[i], &file) == 0 &&
-				(S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
-			continue;
-		else if (_strcmp(argv[i], "---") == 0) /*//error:----*/
-		{
-			fprintf(stderr,
-			"%s: cannot access '%s': No such file or directory\nTry 'hls --help' for more information.\n",
-			argv[0], argv[i]);
-			/*free(errors);*/
-			exit(2);
-		}
-		else if (argv[i][0] == '-' && _strlen(argv[i]) > 1)
-			continue;
-		else
-		{
-			fprintf(stderr,
-			"%s: cannot access %s: No such file or directory\n",
-			argv[0], argv[i]);
-			exit(2);
-		}
-	}
-}
 
 /**
  * validate_arguments -function that validate all arguments
@@ -89,14 +90,14 @@ char **validate_arguments(int argc, char *argv[]) /* char **errors */
 	struct stat file;
 
 	valid_argv = _calloc(argc, sizeof(*valid_argv));
-	if (valid_argv)
+	if (!valid_argv)
+		return (NULL);
+
+	for (i = 1; argv[i] != NULL; i++)
 	{
-		for (i = 1; argv[i] != NULL; i++)
-		{
-			if (lstat(argv[i], &file) == 0 &&
-			(S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
-			valid_argv[m] = _strdup(argv[i]), m++;
-		}
+		if (lstat(argv[i], &file) == 0 &&
+		(S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
+		valid_argv[m] = _strdup(argv[i]), m++;
 	}
 
 	if (m == 0)

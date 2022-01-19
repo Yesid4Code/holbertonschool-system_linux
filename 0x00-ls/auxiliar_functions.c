@@ -9,6 +9,7 @@
 bool include(char *string, char arg)
 {
 	int i;
+
 	for (i = 0; i < _strlen(string); i++)
 	{
 		if (string[i] == arg)

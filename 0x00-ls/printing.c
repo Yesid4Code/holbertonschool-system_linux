@@ -8,7 +8,7 @@
 void printing(char *flags, char **argv)
 {
 	int i;
-	(void)flags;
+	/*(void)flags;*/
 	if (!argv)
 		return;
 

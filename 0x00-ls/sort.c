@@ -10,6 +10,7 @@
 char **sorting(char *flags, char **argv)
 {
 	int i;
+
 	if (!include(flags, 't') && !include(flags, 'S'))
 		sort_default(argv);
 	else
