@@ -81,7 +81,7 @@ int dir_process(int argc, char **argv, char *flags, char **files, char *hls)
 			if (dir == NULL)
 			{
 				fprintf(stderr,
-					"%s: cannot open directory %s: Permission denied",
+					"%s: cannot open directory %s: Permission denied\n",
 					hls, argv[i]);
 				return (-1);
 			}
