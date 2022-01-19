@@ -7,13 +7,26 @@
  */
 void printing(char *flags, char **argv)
 {
+	int i;
 	(void)flags;
 	if (!argv)
 		return;
 
-	for (int i = 0; argv[i]; i++)
+
+	if (include(flags, '1') && !include(flags, 'l'))
 	{
-		printf("%s  ", argv[i]);
+		for (i = 0; argv[i]; i++)
+		{
+			printf("%s", argv[i]);
+			argv[i + 1] ? printf("\n") : 1;
+		}
 	}
+	else if (include(flags, 'l'))
+	{
+		flag_l(argv);
+	}
+	else
+		for (i = 0; argv[i]; i++)
+			printf("%s  ", argv[i]);
 	printf("\n");
 }

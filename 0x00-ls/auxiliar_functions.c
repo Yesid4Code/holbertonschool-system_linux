@@ -8,7 +8,8 @@
  */
 bool include(char *string, char arg)
 {
-	for (int i = 0; i < _strlen(string); i++)
+	int i;
+	for (i = 0; i < _strlen(string); i++)
 	{
 		if (string[i] == arg)
 			return (true);

@@ -8,12 +8,12 @@
  */
 char **get_files(char **argv)
 {
-	int j = 0;
+	int i, j = 0;
 	char **files = NULL;
 	struct stat file;
 
 	files = _calloc(100, sizeof(*files));
-	for (int i = 0; argv[i]; i++)
+	for (i = 0; argv[i]; i++)
 	{
 		if (lstat(argv[i], &file) == 0 && S_ISREG(file.st_mode))
 			files[j] = _strdup(argv[i]), j++;
@@ -33,13 +33,13 @@ char **get_files(char **argv)
  */
 char **get_dirs(char **argv)
 {
-	int j = 0;
+	int i, j = 0;
 	char **directories = NULL;
 	struct stat dir;
 
 	directories = _calloc(100, sizeof(*directories));
 
-	for (int i = 0; argv[i]; i++)
+	for (i = 0; argv[i]; i++)
 	{
 		if (lstat(argv[i], &dir) == 0 && S_ISDIR(dir.st_mode))
 			directories[j] = _strdup(argv[i]), j++;
@@ -63,7 +63,7 @@ char **get_dirs(char **argv)
  */
 int dir_process(int argc, char **argv, char *flags, char **files)
 {
-	int j = 0;
+	int i, j = 0;
 	char **dir_content = NULL;
 	struct dirent *read = NULL;
 	struct stat file;
@@ -72,7 +72,7 @@ int dir_process(int argc, char **argv, char *flags, char **files)
 	if (!argv)
 		return (-1);
 
-	for (int i = 0; argv[i]; i++)
+	for (i = 0; argv[i]; i++)
 	{
 		if (lstat(argv[i], &file) == 0 && S_ISDIR(file.st_mode))
 		{
@@ -96,9 +96,9 @@ int dir_process(int argc, char **argv, char *flags, char **files)
 							read->d_name[0] != '.')
 					dir_content[j] = _strdup(read->d_name), j++;
 			}
-			closedir(dir);
+			closedir(dir), sorting(flags, dir_content);
 		}
-		files ? printf("\n") : 1, (argc > 2) ? printf("%s:\n", argv[i]) : 1;
+		files ? printf("\n") : 1, (argc > 2 && flags) ? printf("%s:\n", argv[i]) : 1;
 		printing(flags, dir_content);
 		(argv[i + 1]) ? printf("\n") : 1, free_array(dir_content);
 	}

@@ -11,12 +11,13 @@ char *validate_flags(char **argv)
 	char *valid_flags = "1aAlrStR";
 	char buff[32] = {'\0'}, identified_flag[2];
 	char *flags = NULL;
+	int i, j;
 
-	for (int i = 1; argv[i] != NULL; i++)
+	for (i = 1; argv[i] != NULL; i++)
 	{
 		if (argv[i][0] == '-')
 		{
-			for (int j = 0; argv[i][j]; j++)
+			for (j = 0; argv[i][j]; j++)
 			{
 				if (include(valid_flags, argv[i][j]) && !include(buff, argv[i][j]))
 				{
@@ -46,9 +47,10 @@ char *validate_flags(char **argv)
  */
 void argument_errors(char **argv)
 {
+	int i;
 	struct stat file;
 
-	for (int i = 0; argv[i]; i++)
+	for (i = 0; argv[i]; i++)
 	{
 		if (lstat(argv[i], &file) == 0 &&
 				(S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))
@@ -82,14 +84,14 @@ void argument_errors(char **argv)
  */
 char **validate_arguments(int argc, char *argv[]) /* char **errors */
 {
-	int m = 0;
+	int i, m = 0;
 	char **valid_argv = NULL;
 	struct stat file;
 
 	valid_argv = _calloc(argc, sizeof(*valid_argv));
 	if (valid_argv)
 	{
-		for (int i = 1; argv[i] != NULL; i++)
+		for (i = 1; argv[i] != NULL; i++)
 		{
 			if (lstat(argv[i], &file) == 0 &&
 			(S_ISREG(file.st_mode) || S_ISDIR(file.st_mode)))

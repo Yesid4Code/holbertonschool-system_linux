@@ -9,11 +9,12 @@
  */
 char **sorting(char *flags, char **argv)
 {
+	int i;
 	if (!include(flags, 't') && !include(flags, 'S'))
 		sort_default(argv);
 	else
 	{
-		for (int i = 0; flags[i]; i++)
+		for (i = 0; flags[i]; i++)
 		{
 			if (flags[i] == 't')
 				sort_time(argv);
