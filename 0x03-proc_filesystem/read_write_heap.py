@@ -51,5 +51,6 @@ def main():
     men_map.close()
     mem_file.close()
 
+
 if __name__ == '__main__':
     main()
